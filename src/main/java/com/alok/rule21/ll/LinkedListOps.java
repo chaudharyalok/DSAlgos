@@ -31,6 +31,27 @@ public class LinkedListOps {
 
 	}
 
+	private void traversalRecursion(Node node) {
+
+		if (node == null)
+			return;
+
+		System.out.print(node.value + "->");
+		traversalRecursion(node.next);
+
+	}
+	
+	private void traversalReversalRecursion(Node node) {
+
+		if (node == null)
+			return;
+
+		
+		traversalReversalRecursion(node.next);
+		System.out.print(node.value + "->");
+
+	}
+
 	private Node reverseLL(Node node) {
 
 		Node current = node;
@@ -57,10 +78,13 @@ public class LinkedListOps {
 
 		LinkedListOps ll = new LinkedListOps();
 		ll.traversal(head);
+		System.out.println();
+//		ll.traversalRecursion(head);
+		ll.traversalReversalRecursion(head);
 
-		Node newHead = ll.reverseLL(head);
+/*		Node newHead = ll.reverseLL(head);
 		System.out.println("");
-		ll.traversal(newHead);
+		ll.traversal(newHead);*/
 
 	}
 

@@ -50,6 +50,20 @@ public class TreeTraversal {
 		inorderDFS(node.right);
 
 	}
+	
+	private void inorderLeftSubTreeDFS(Node node, boolean left) {
+		if (node == null)
+			return;
+		
+		inorderLeftSubTreeDFS(node.left,false);
+		
+		System.out.print(node.value + " ");
+		if(!left){
+			
+			inorderLeftSubTreeDFS(node.right,false);
+		}
+
+	}
 
 	private void preorderDFS(Node node) {
 
@@ -71,6 +85,86 @@ public class TreeTraversal {
 		postorderDFS(node.right);
 		System.out.print(node.value + " ");
 	}
+	
+	private void printLevelOrder(Node root){
+		
+		int height = height(root);
+		for(int i = 1; i<=height;i++){
+			printCurrentLevel(root, i);
+		}
+	}
+	
+	private void printCurrentLevel(Node node, int level){
+		
+		if(node == null)
+			return;
+		 if(level == 1)
+		{
+			System.out.print(node.value + " ");
+		}
+		else if(level>1){
+			printCurrentLevel(node.left, level-1);
+			printCurrentLevel(node.right, level-1);
+		}
+	}
+	
+	private int height(Node root){
+		
+		if(root == null)
+			return 0;
+		
+		int heightLeft = height(root.left);
+		int heightRight = height(root.right);
+		
+		if(heightLeft>heightRight)
+			return heightLeft+1;
+		else return heightRight+1;
+		
+		
+	}
+	
+	static int max_level = 0;
+	private void leftViewTree(Node node){
+		leftViewTreeUtil(node, 1);
+	}
+	private void leftViewTreeUtil(Node node,int level){
+		
+		if(node == null)
+			return;
+		if(max_level < level){
+			System.out.print(node.value + " ");
+			max_level = level;
+		}
+		
+		leftViewTreeUtil(node.left, level+1);
+		leftViewTreeUtil(node.right, level+1);
+	}
+	
+	private void printLeftViewQueue(Node node){
+		
+		if(node == null)
+			return;
+		Queue<Node> queue = new LinkedList<>();
+		
+		queue.add(node);
+		
+		while(!queue.isEmpty()){
+		
+			int size = queue.size();
+			for(int i = 0; i<size;i++){
+				Node temp = queue.poll();
+				
+				if(i == 0)
+					System.out.print(temp.value + " ");
+				
+				if(temp.left != null)
+					queue.add(temp.left);
+				if(temp.right != null)
+					queue.add(temp.right);
+				
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 
@@ -80,13 +174,20 @@ public class TreeTraversal {
 
 		root.left = left1;
 		root.right = right1;
+		root.left.right = new Node(6);
 
 		Node four = new Node(2);
 		root.left.left = four;
 		root.right.left = new Node(4);
 
 		TreeTraversal bfs = new TreeTraversal();
-		bfs.postorderDFS(root);
+	//	bfs.inorderLeftSubTreeDFS(root,true);
+	//	bfs.inorderDFS(root);
+		
+		bfs.leftViewTree(root);
+		System.out.println();
+		bfs.printLeftViewQueue(root);
+		
 
 	}
 

@@ -6,6 +6,12 @@ public class Employee {
 	private long salary;
 	private String dept;
 	
+	public Employee(String name,String dept) {
+		super();
+		this.name = name;
+		this.dept = dept;
+	}
+	
 	public Employee(String name, long salary, String dept) {
 		super();
 		this.name = name;
@@ -35,6 +41,11 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [name=" + name + ", salary=" + salary + ", dept=" + dept + "]";
+	}
+	
+	public String transform(){
+		
+		return name + dept;
 	}
 	
 }

@@ -2,6 +2,12 @@ package com.alok.rule21.sorting;
 
 public class HeapSort {
 
+	/**
+	 * in place sorting
+	 * time complexity of O(nlogn)
+	 * 
+	 * 
+	 */
 	public static void main(String[] args) {
 
 		int[] arr = { 5, 1, 9, 3, 0, 6 };

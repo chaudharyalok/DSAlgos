@@ -2,6 +2,7 @@ package com.alok.rule21.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class TreeTraversal {
 
@@ -40,6 +41,10 @@ public class TreeTraversal {
 
 	}
 
+	/**
+	 * recursive
+	 * @param node
+	 */
 	private void inorderDFS(Node node) {
 
 		if (node == null)
@@ -51,20 +56,10 @@ public class TreeTraversal {
 
 	}
 	
-	private void inorderLeftSubTreeDFS(Node node, boolean left) {
-		if (node == null)
-			return;
-		
-		inorderLeftSubTreeDFS(node.left,false);
-		
-		System.out.print(node.value + " ");
-		if(!left){
-			
-			inorderLeftSubTreeDFS(node.right,false);
-		}
-
-	}
-
+	/**
+	 * recursive
+	 * @param node
+	 */
 	private void preorderDFS(Node node) {
 
 		if (node == null)
@@ -76,6 +71,10 @@ public class TreeTraversal {
 
 	}
 
+	/**
+	 * recursive
+	 * @param node
+	 */
 	private void postorderDFS(Node node) {
 
 		if (node == null)
@@ -164,6 +163,51 @@ public class TreeTraversal {
 				
 			}
 		}
+	}
+	
+	/**
+	 * iterative inorder traversal 
+	 * @param args
+	 */
+	private void inOrderItr(Node root){
+		
+		if(root == null)
+			return;
+		Node curr = root;
+		Stack<Node> stack = new Stack<Node>();
+		
+		while(curr != null || stack.size() > 0){
+			while(curr != null){
+				stack.push(curr);
+				curr = curr.left;
+			}
+			 curr = stack.pop();
+			 System.out.println(curr.value + " ");
+			 curr = curr.right;
+		}
+	}
+	
+	/**
+	 * iterative preorder traversal
+	 * @param args
+	 */
+	private void preOrder(Node root){
+		if(root == null)
+			return;
+		
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(root);
+		
+		while(stack.isEmpty() == false){
+			Node node = stack.pop();
+			System.out.println(node.value + " ");
+			
+			if(node.right != null)
+				stack.push(node.right);
+			if(node.left != null)
+				stack.push(node.left);
+		}
+		
 	}
 
 	public static void main(String[] args) {
